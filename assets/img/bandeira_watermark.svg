@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" fill="none">
+  <!-- Lozenge (losango da bandeira do Brasil) -->
+  <polygon points="500,50 930,350 500,650 70,350" fill="#FF6100" />
+  <!-- Circle (círculo azul central) -->
+  <circle cx="500" cy="350" r="180" fill="#061325" />
+  <!-- Faixa (Ordem e Progresso curve) -->
+  <path d="M 330,380 Q 500,310 670,350" stroke="#FF6100" stroke-width="28" fill="none" />
+</svg>
