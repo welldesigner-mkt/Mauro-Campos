@@ -191,28 +191,39 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .reveal-right.visible { opacity: 1; transform: translateX(0); }
 
 /* ============================================================
-   1 — NAVBAR
+   1 — NAVBAR — Glassmorphism Pill
    ============================================================ */
 #navbar {
-  position: sticky;
-  top: 0;
-  left: 0; right: 0;
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 1140px;
   z-index: 1000;
-  padding: 14px 0;
-  background: rgba(6,19,37,0.0);
-  backdrop-filter: blur(0px);
-  transition: all 0.35s ease;
+  padding: 10px 16px;
+  background: rgba(6, 19, 37, 0.55);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 100px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(255,255,255,0.06) inset;
+  transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
 #navbar.scrolled {
-  background: rgba(6,19,37,0.97);
-  backdrop-filter: blur(12px);
-  padding: 10px 0;
-  box-shadow: 0 2px 20px rgba(0,0,0,.35);
+  background: rgba(6, 19, 37, 0.88);
+  border-color: rgba(255,255,255,0.14);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(255,255,255,0.08) inset;
 }
 .nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 }
 .nav-logo {
   display: flex;
@@ -220,7 +231,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   flex-shrink: 0;
 }
 .nav-logo-img {
-  height: 32px;
+  height: 30px;
   width: auto;
   display: block;
   transition: opacity var(--transition);
@@ -228,28 +239,37 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .nav-logo:hover .nav-logo-img { opacity: 0.85; }
 .nav-links {
   display: none;
-  gap: 28px;
+  gap: 4px;
+  align-items: center;
 }
 .nav-links a {
   font-family: var(--font-title);
-  font-weight: 600;
-  font-size: 12px;
-  letter-spacing: -0.05em;
+  font-weight: 100;
+  font-size: 13px;
+  letter-spacing: 0;
   text-transform: uppercase;
-  color: rgba(255,255,255,.8);
-  transition: color var(--transition);
+  color: rgba(255,255,255,.75);
+  padding: 6px 12px;
+  border-radius: 50px;
+  transition: color var(--transition), background var(--transition);
 }
-.nav-links a:hover { color: var(--orange); }
+.nav-links a:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.08);
+}
 .nav-cta { display: none; }
 .nav-hamburger {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 4px;
+  padding: 6px;
+  border-radius: 50px;
+  transition: background var(--transition);
 }
+.nav-hamburger:hover { background: rgba(255,255,255,0.08); }
 .nav-hamburger span {
   display: block;
-  width: 24px;
+  width: 22px;
   height: 2px;
   background: var(--white);
   border-radius: 2px;
@@ -274,8 +294,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .mobile-menu.open { right: 0; }
 .mobile-menu a {
   font-family: var(--font-title);
-  font-weight: 700;
+  font-weight: 100;
   font-size: 18px;
+  letter-spacing: 0;
   color: var(--white);
   padding: 14px 0;
   border-bottom: 1px solid rgba(255,255,255,.1);
@@ -1035,11 +1056,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    RESPONSIVE — DESKTOP (≥ 900px)
    ============================================================ */
 @media (min-width: 900px) {
-  #navbar { padding: 16px 0; }
+  #navbar { top: 20px; padding: 12px 20px; }
   .nav-links { display: flex; }
   .nav-cta   { display: inline-flex; }
   .nav-hamburger { display: none; }
-  .nav-logo-img { height: 40px; }
+  .nav-logo-img { height: 36px; }
 
   .hero-content { padding: 120px 0 80px; }
 
@@ -1100,7 +1121,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    ============================================================ */
 section[id],
 #footer {
-  scroll-margin-top: 72px;
+  scroll-margin-top: 96px;
 }
 
 /* ============================================================
