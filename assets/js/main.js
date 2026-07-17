@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
       [class*="posts-item"],
       [class*="posts-item-link"],
       [class*="posts-item-image"] {
-        border-radius: 20px !important;
+        border-radius: 0px !important;
         overflow: hidden !important;
       }
       .elfsight-app-branding,

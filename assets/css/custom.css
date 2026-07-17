@@ -166,6 +166,15 @@
   }
 }
 
+.quem-section-title {
+  font-size: clamp(28px, 6vw, 44px) !important;
+  margin-bottom: 20px !important;
+  text-transform: uppercase !important;
+}
+.quem-section-title .highlight-orange {
+  color: var(--orange) !important;
+}
+
 .hero-title .highlight {
   color: var(--orange);
   background: linear-gradient(to right, #fc3000 0%, #e3e2e6 100%);
@@ -279,6 +288,11 @@
 }
 
 /* Estilos do Banner Frase de Destaque */
+.banner-phrase::before {
+  display: none !important;
+  content: none !important;
+}
+
 .banner-phrase.blue-gradient {
   background: linear-gradient(to right, #061325 0%, #0038a8 100%) !important;
   padding: 35px 20px !important;
@@ -367,7 +381,7 @@
     right: 0 !important;
     height: 100% !important;
     object-fit: cover !important;
-    object-position: center center !important;
+    object-position: center 20% !important;
   }
 
   .ruas-banner-overlay {
@@ -493,6 +507,9 @@ a[href*="elfsight.com"] {
   }
 
   /* Hero */
+  .hero-image {
+    object-position: 58% top !important;
+  }
   .hero-mobile-br {
     display: block !important;
   }
@@ -550,14 +567,14 @@ a[href*="elfsight.com"] {
   .quem-text {
     text-align: center !important;
   }
-  .quem-text .section-title {
+  .quem-section-title {
     font-size: 28px !important;
     line-height: 30.8px !important;
     letter-spacing: -0.8px !important;
     text-transform: uppercase !important;
     color: #061325 !important;
   }
-  .quem-text .section-title span {
+  .quem-section-title .highlight-orange {
     color: #ff6100 !important;
     display: block !important;
   }
@@ -593,7 +610,7 @@ a[href*="elfsight.com"] {
   }
   .defende-header .section-title .accent {
     font-size: clamp(42px, 12vw, 81px) !important;
-    line-height: 76.7px !important;
+    line-height: 0.9 !important;
     letter-spacing: -3.7px !important;
     display: block !important;
     background: linear-gradient(to right, #fc3000 0%, rgba(6, 19, 37, 0.68) 100%) !important;
@@ -635,6 +652,9 @@ a[href*="elfsight.com"] {
   /* Banner Ruas */
   .ruas-banner {
     height: 561px !important;
+  }
+  .ruas-banner-img {
+    object-position: 30% top !important;
   }
   .ruas-banner-overlay {
     background: linear-gradient(to bottom, rgba(6, 19, 37, 0.8) 0%, rgba(6, 19, 37, 0.4) 100%) !important;
