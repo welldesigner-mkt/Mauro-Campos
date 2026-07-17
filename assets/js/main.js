@@ -150,4 +150,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
   sections.forEach(s => sectionObserver.observe(s));
 
+  /* ── 8. CUSTOMIZE ELFSIGHT INSTAGRAM WIDGET ──────────────────── */
+  (function() {
+    const css = `
+      .eapps-instagram-feed-posts-item,
+      .eapps-instagram-feed-posts-item-link,
+      .eapps-instagram-feed-posts-item-image,
+      .eapps-instagram-feed-posts-item-container,
+      [class*="posts-item"],
+      [class*="posts-item-link"],
+      [class*="posts-item-image"] {
+        border-radius: 20px !important;
+        overflow: hidden !important;
+      }
+      .elfsight-app-branding,
+      .eapps-widget-branding,
+      a[href*="elfsight.com"],
+      div[class*="branding"],
+      [class*="widget-branding"] {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    `;
+
+    function injectStyles(root) {
+      if (!root) return;
+      if (root.querySelector && root.querySelector('#elfsight-custom-overrides')) return;
+
+      const style = document.createElement('style');
+      style.id = 'elfsight-custom-overrides';
+      style.textContent = css;
+      root.appendChild(style);
+    }
+
+    function styleElfsight() {
+      const hosts = document.querySelectorAll('[class*="elfsight-app"]');
+      hosts.forEach(host => {
+        injectStyles(host);
+        if (host.shadowRoot) {
+          injectStyles(host.shadowRoot);
+        }
+        const allDescendants = host.querySelectorAll('*');
+        allDescendants.forEach(desc => {
+          if (desc.shadowRoot) {
+            injectStyles(desc.shadowRoot);
+          }
+        });
+      });
+
+      const branding = document.querySelectorAll('.elfsight-app-branding, .eapps-widget-branding, a[href*="elfsight.com"]');
+      branding.forEach(b => {
+        b.style.display = 'none';
+        b.style.opacity = '0';
+        b.style.visibility = 'hidden';
+        b.style.height = '0';
+        b.style.pointerEvents = 'none';
+      });
+    }
+
+    setInterval(styleElfsight, 250);
+  })();
+
 });
+
