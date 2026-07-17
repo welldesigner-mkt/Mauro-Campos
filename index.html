@@ -19,9 +19,10 @@
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
 
-  <!-- Favicon placeholder -->
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23071B3A'/><text y='22' x='5' font-size='18' font-weight='900' fill='%23F36C21' font-family='Arial'>MC</text></svg>" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="shortcut icon" href="assets/img/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.svg" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -414,14 +415,17 @@
      BANNER — Imagem de visita de rua
      ============================================================ -->
   <div class="ruas-banner" aria-hidden="true">
-    <img src="assets/img/ruas_mauro.jpg" alt="Mauro Campos em feira e visita à comunidade no Rio de Janeiro"
-      class="ruas-banner-img" loading="lazy" />
+    <picture>
+      <source media="(min-width: 900px)" srcset="assets/img/ruas_mauro_desktop.png" />
+      <img src="assets/img/ruas_mauro_mobile.png" alt="Mauro Campos em feira e visita à comunidade no Rio de Janeiro"
+        class="ruas-banner-img" loading="lazy" />
+    </picture>
     <div class="ruas-banner-overlay">
       <div class="container">
         <p class="reveal ruas-banner-text">
           O RIO ESTÁ<br />
           NAS RUAS.<br />
-          <span>MAURO TAMBÉM.</span>
+          <span>MAURO TAMBÉM</span>
         </p>
       </div>
     </div>

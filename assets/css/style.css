@@ -337,7 +337,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   min-height: 100svh;
   background: var(--navy);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   overflow: hidden;
 }
 
