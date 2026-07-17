@@ -4,28 +4,35 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ── 1. NAVBAR SCROLL ──────────────────────────────────── */
+  /* ── 1. NAVBAR SCROLL (Otimizado com rAF) ──────────────── */
   const navbar = document.getElementById('navbar');
+  let ticking = false;
   const onScroll = () => {
-    if (window.scrollY > 60) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        if (window.scrollY > 60) {
+          navbar?.classList.add('scrolled');
+        } else {
+          navbar?.classList.remove('scrolled');
+        }
+        ticking = false;
+      });
+      ticking = true;
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true });
 
   /* ── 2. MOBILE MENU ────────────────────────────────────── */
-  const hamburger    = document.getElementById('hamburger');
-  const mobileMenu   = document.getElementById('mobileMenu');
-  const mobileClose  = document.getElementById('mobileClose');
-  const mobileOverlay= document.getElementById('mobileOverlay');
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  const mobileOverlay = document.getElementById('mobileOverlay');
 
-  const openMenu  = () => { mobileMenu.classList.add('open'); mobileOverlay.classList.add('show'); document.body.style.overflow = 'hidden'; };
+  const openMenu = () => { mobileMenu.classList.add('open'); mobileOverlay.classList.add('show'); document.body.style.overflow = 'hidden'; };
   const closeMenu = () => { mobileMenu.classList.remove('open'); mobileOverlay.classList.remove('show'); document.body.style.overflow = ''; };
 
-  if (hamburger)     hamburger.addEventListener('click', openMenu);
-  if (mobileClose)   mobileClose.addEventListener('click', closeMenu);
+  if (hamburger) hamburger.addEventListener('click', openMenu);
+  if (mobileClose) mobileClose.addEventListener('click', closeMenu);
   if (mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
 
   // Close on nav link click
@@ -34,15 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ── 3. SCROLL REVEAL ──────────────────────────────────── */
-  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-  const observer  = new IntersectionObserver((entries) => {
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
   revealEls.forEach(el => observer.observe(el));
 
@@ -51,12 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const el     = entry.target;
+        const el = entry.target;
         const target = parseInt(el.dataset.count, 10);
         const suffix = el.dataset.suffix || '';
-        let current  = 0;
-        const step   = Math.ceil(target / 60);
-        const tick   = () => {
+        let current = 0;
+        const step = Math.ceil(target / 60);
+        const tick = () => {
           current = Math.min(current + step, target);
           el.textContent = current + suffix;
           if (current < target) requestAnimationFrame(tick);
@@ -70,17 +77,17 @@ document.addEventListener('DOMContentLoaded', () => {
   counters.forEach(el => counterObserver.observe(el));
 
   /* ── 5. FORM SUBMISSION (mock) ─────────────────────────── */
-  const form  = document.getElementById('cadastroForm');
+  const form = document.getElementById('cadastroForm');
   const toast = document.getElementById('toast');
 
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const nome     = document.getElementById('nome').value.trim();
+      const nome = document.getElementById('nome').value.trim();
       const whatsapp = document.getElementById('whatsapp').value.trim();
-      const cidade   = document.getElementById('cidade').value.trim();
-      const consent  = document.getElementById('consent').checked;
+      const cidade = document.getElementById('cidade').value.trim();
+      const consent = document.getElementById('consent').checked;
 
       if (!nome || !whatsapp || !cidade) {
         showToast('⚠️ Preencha todos os campos obrigatórios.', 'error');
@@ -122,9 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
     waInput.addEventListener('input', (e) => {
       let v = e.target.value.replace(/\D/g, '').substring(0, 11);
       if (v.length >= 7) {
-        v = `(${v.substring(0,2)}) ${v.substring(2,7)}-${v.substring(7)}`;
+        v = `(${v.substring(0, 2)}) ${v.substring(2, 7)}-${v.substring(7)}`;
       } else if (v.length >= 3) {
-        v = `(${v.substring(0,2)}) ${v.substring(2)}`;
+        v = `(${v.substring(0, 2)}) ${v.substring(2)}`;
       } else if (v.length > 0) {
         v = `(${v}`;
       }
@@ -151,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
   sections.forEach(s => sectionObserver.observe(s));
 
   /* ── 8. CUSTOMIZE ELFSIGHT INSTAGRAM WIDGET ──────────────────── */
-  (function() {
+  (function () {
     const css = `
       .eapps-instagram-feed-posts-item,
       .eapps-instagram-feed-posts-item-link,
@@ -213,7 +220,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    setInterval(styleElfsight, 250);
+    let attempts = 0;
+    const interval = setInterval(() => {
+      styleElfsight();
+      attempts++;
+      if (attempts > 40) { // Desacelera para verificação leve a cada 3s após 10s
+        clearInterval(interval);
+        setInterval(styleElfsight, 3000);
+      }
+    }, 250);
   })();
 
 });

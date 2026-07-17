@@ -31,7 +31,9 @@
     href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,400&family=Bebas+Neue&display=swap"
     rel="stylesheet" />
 
-  <!-- Stylesheets -->
+  <!-- Stylesheets Preload & Loading -->
+  <link rel="preload" href="assets/css/style.css" as="style" />
+  <link rel="preload" href="assets/css/custom.css" as="style" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="assets/css/custom.css" />
 </head>
@@ -69,7 +71,7 @@
     <div class="container">
       <div class="nav-inner">
         <a href="#hero" class="nav-logo" id="nav-logo-link" aria-label="Mauro Campos — Página inicial">
-          <img src="assets/img/logo.svg" alt="Mauro Campos" class="nav-logo-img" />
+          <img src="assets/img/logo.svg" alt="Mauro Campos" class="nav-logo-img" decoding="async" />
         </a>
 
         <nav class="nav-links" aria-label="Navegação principal">
@@ -93,8 +95,8 @@
   <section id="hero" aria-label="Apresentação principal">
     <picture>
       <source media="(min-width: 900px)" srcset="assets/img/hero_desktop.png" />
-      <img src="assets/img/hero_mobile.png" alt="Mauro Campos, pré-candidato ao Senado pelo Rio de Janeiro"
-        class="hero-image" fetchpriority="high" />
+      <img src="assets/img/hero_mobile.png?v=20260717-3" alt="Mauro Campos, pré-candidato ao Senado pelo Rio de Janeiro"
+        class="hero-image" fetchpriority="high" decoding="async" />
     </picture>
     <div class="hero-bg-overlay" aria-hidden="true"></div>
 
@@ -139,7 +141,7 @@
     <div class="container">
       <div class="quem-grid">
         <div class="quem-image-wrap reveal-left">
-          <img src="assets/img/quem_mauro.jpg" alt="Mauro Campos no Rio de Janeiro" class="quem-image" loading="lazy" />
+          <img src="assets/img/quem_mauro.jpg" alt="Mauro Campos no Rio de Janeiro" class="quem-image" loading="lazy" decoding="async" />
           <div class="quem-badge">
             +45 anos<br />
             <span style="font-size:11px; font-weight:200; letter-spacing:0; opacity:.85;">de geração de empregos</span>
@@ -421,7 +423,7 @@
     <picture>
       <source media="(min-width: 900px)" srcset="assets/img/ruas_mauro_desktop.png" />
       <img src="assets/img/ruas_mauro_mobile.png" alt="Mauro Campos em feira e visita à comunidade no Rio de Janeiro"
-        class="ruas-banner-img" loading="lazy" />
+        class="ruas-banner-img" loading="lazy" decoding="async" />
     </picture>
     <div class="ruas-banner-overlay">
       <div class="container">
@@ -521,7 +523,7 @@
   <div class="toast" id="toast" role="alert" aria-live="polite" aria-atomic="true"></div>
 
   <!-- Scripts -->
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js" defer></script>
   <script>
     // Set current year in footer
     document.getElementById('footer-year').textContent = new Date().getFullYear();
